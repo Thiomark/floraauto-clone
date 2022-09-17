@@ -25,7 +25,7 @@ const Home: NextPage = () => {
                         </div>
                         <div className='grid grid-cols-3 gap-x-24'>
                             {[...Array(6)].map((item, index) => (
-                                <div className='grid grid-cols-[auto_auto] grid-rows-2 z-20'>
+                                <div key={index} className='grid grid-cols-[auto_auto] grid-rows-2 z-20'>
                                     <h1 className='bg-red-500 rounded-full mr-10 h-20 w-20 flex items-center justify-center row-span-2'>icon</h1>
                                     <div>
                                         <h1 className='font-bold text-lg uppercase'>Lorem ipsum</h1>
