@@ -73,7 +73,7 @@ const Services: NextPage = () => {
                     <div className='grid grid-cols-3 gap-10 mt-10'>
                         {[...Array(3)].map((item, index) => {
                             return (
-                    <           div className="p-8 border bg-white">
+                    <           div key={index} className="p-8 border bg-white">
                                     <p className="leading-loose text-gray-700">
                                         “Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quibusdam ducimus libero ad
                                         tempora doloribus expedita laborum saepe voluptas perferendis delectus assumenda rerum, culpa
