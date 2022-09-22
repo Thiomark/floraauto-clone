@@ -94,7 +94,7 @@ const Services: NextPage = () => {
                     </div>
                 </div>
             </section>
-            <div className='mx-auto container grid py-20 grid-cols-2 gap-10'>
+            <section className='mx-auto container grid py-20 grid-cols-2 gap-10'>
                 <div className=''>
                     <h1 className='text-brand font-bold text-lg uppercase'>FAQ</h1>
                     <p className='text-3xl font-bold uppercase text-gray-900 py-3'>GENERAL QUESTION</p>
@@ -103,7 +103,7 @@ const Services: NextPage = () => {
                     </div>
                 </div>
                 <img src={carImages[3]} alt="" className='w-full' />
-            </div>
+            </section>
         </Layout>
     )
 }
