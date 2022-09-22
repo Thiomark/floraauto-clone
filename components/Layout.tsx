@@ -3,13 +3,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
-import { store_name, links } from '../utils/constants';
+import { store_name, links, carImages } from '../utils/constants';
 
 interface Props {
     children: ReactNode;
     title?: string;
     backgroundImage: string;
-    imageHeight?: string;
+    imageHeight: string;
   }
 
 const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage, imageHeight}) => {
@@ -47,10 +47,10 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                     </div>
                     <div className={imageHeight + ' flex flex-col relative after:bg-opacity-50 after:absolute after:top-0 after:bottom-0 after:w-full after:bg-black bg-center bg-no-repeat bg-cover bg'} style={{backgroundImage: `url(${backgroundImage})`}}>
                         <div className='flex items-center bg-black container mx-auto border-t'>
-                            <div className='bg-red-500 z-10 w-full flex-1 flex items-center justify-center'>
+                            <div className='bg-red-600 z-10 w-full flex-1 flex items-center justify-center'>
                                 <nav>
                                     <ul className='flex text-center space-x-4'>
-                                        {links.map(link => <li key={link.url} className='py-4'><Link href={link.url}><h1 className={`font-bold text-xl ${router.pathname === link.url ? 'text-black' : 'text-gray-100'}`}>{link.name}</h1></Link></li>)}
+                                        {links.map(link => <li key={link.url} className='py-4'><Link href={link.url}><a className={`font-bold text-xl ${router.pathname === link.url ? 'text-black' : 'text-gray-100'}`}>{link.name}</a></Link></li>)}
                                     </ul>
                                 </nav>
                             </div>
@@ -72,12 +72,12 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                     </div>
                 </header>
                 {children}
-                <footer className="bg-white dark:bg-black">
+                <footer className='text-white relative py-10 bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[6]})`}}>
                     <div className="container px-6 py-8 mx-auto">
                         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             <div>
-                                <div className="text-xs font-medium h-10 text-red-500 uppercase">
-                                    Icon
+                                <div className="text-2xl font-bold h-10 text-red-500 uppercase">
+                                    logo
                                 </div>
                                 <div className="font-medium text-red-600 uppercase text-xl">
                                     PROFESSIONAL SERVICE <span className='block'>GUARANTEED</span>
@@ -95,7 +95,7 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                             </div>
 
                             <div>
-                                <div className="text-xs font-medium text-gray-400 uppercase">
+                                <div className="text-2xl font-extrabold text-white uppercase">
                                     Pages
                                 </div>
 
@@ -114,7 +114,7 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                             </div>
 
                             <div>
-                                <div className="text-xs font-medium text-gray-400 uppercase">
+                                <div className="text-2xl font-extrabold text-white uppercase">
                                     WORK HOURS 
                                 </div>
 
