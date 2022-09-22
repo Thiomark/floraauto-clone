@@ -10,9 +10,10 @@ interface Props {
     title?: string;
     backgroundImage: string;
     imageHeight: string;
-  }
+    imageText?: any
+}
 
-const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage, imageHeight}) => {
+const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage, imageHeight, imageText} : Props) => {
 
     const router = useRouter()
 
@@ -45,7 +46,7 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                             </div>                        
                         </div>
                     </div>
-                    <div className={imageHeight + ' flex flex-col relative after:bg-opacity-50 after:absolute after:top-0 after:bottom-0 after:w-full after:bg-black bg-center bg-no-repeat bg-cover bg'} style={{backgroundImage: `url(${backgroundImage})`}}>
+                    <div className={imageHeight + ' flex flex-col relative bg-center bg-no-repeat bg-cover bg'} style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${backgroundImage})`}}>
                         <div className='flex items-center bg-black container mx-auto border-t'>
                             <div className='bg-red-600 z-10 w-full flex-1 flex items-center justify-center'>
                                 <nav>
@@ -64,11 +65,12 @@ const Layout: NextPage<Props> = ({children, title = store_name, backgroundImage,
                                 </svg>
                             </div>
                         </div>
-                        <div className='flex-1 px-20 container mx-auto flex text-white space-y-8 flex-col z-10 font-bold justify-center uppercase'>
-                            <h1>Best <span className='text-red-500 text-xl'>Car</span> Repair</h1>
-                            <p className='text-5xl'>We are qualified & <span className='text-red-500 block'>Professional</span></p>
-                            <button className='px-8 w-fit py-4 bg-red-600 text-white'>Get started</button>
-                        </div>
+                        {imageText ? imageText : (
+                            <div className='flex-1 px-20 container mx-auto flex text-white space-y-4 flex-col items-center justify-center'>
+                                <h1 className='text-3xl font-bold uppercase'>Contact</h1>
+                                <h1 className='capitalize'>Home <span className='text-red-600'>&gt;</span> {router.pathname.replace('/', '')}</h1>
+                            </div>
+                        )}
                     </div>
                 </header>
                 {children}
