@@ -14,7 +14,7 @@ const Contactus: NextPage = () => {
         if(index === 0 || index === 3 || index === 4) return 'col-span-2'
     }
     return (
-        <Layout title='Contact Us' backgroundImage={carImages[1]} imageHeight='h-[60vh]'>
+        <Layout backgroundImage={carImages[1]} imageHeight='h-[60vh]'>
             <div className='grid grid-cols-2 gap-10 container mx-auto'>
                 <form className={formStyle}>
                     <h1 className='bg-red-600 text-white text-2xl p-4 font-bold col-span-2 text-center'>MESSAGE OR QUESTION</h1>
