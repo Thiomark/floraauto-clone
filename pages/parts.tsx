@@ -46,19 +46,19 @@ const Parts: NextPage = () => {
                             previous
                         </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-blue-600 hover:text-white">
+                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
                             1
                         </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-blue-600 hover:text-white">
+                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
                             2
                         </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-blue-600 hover:text-white">
+                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
                             3
                         </a>
 
-                        <a href="#" className="flex items-center px-4 border py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-blue-600 hover:text-white">
+                        <a href="#" className="flex items-center px-4 border py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-brand hover:text-white">
                             Next
                         </a>
                     </div>
