@@ -2,6 +2,7 @@ export const store_name = 'Subesh Auto Services';
 
 export const links = [
     {name: 'Home', url: '/'},
+    {name: 'Car-Parts', url: '/parts'},
     {name: 'About', url: '/about'},
     {name: 'Services', url: '/services'},
     {name: 'ContactUs', url: '/contact'}
