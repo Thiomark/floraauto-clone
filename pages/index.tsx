@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
+import React from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import { carImages, storeInfo } from '../utils/constants';
 import { ourServices } from '../utils/data';
 
-const HeroSection: NextPage = () => {
+const HeroSection: React.FC = () => {
     return (
         <div className='flex-1 px-10 container mx-auto flex text-white space-y-8 flex-col font-bold justify-center uppercase'>
             <h1>BEST <span className='text-red-500 text-lg lg:text-xl'>Car</span> REPAIR SERVICES <br/> DONE AT SUBESH AUTO SERVICES</h1>
@@ -52,7 +53,7 @@ const Home: NextPage = () => {
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-16'>
                             {ourServices.map((item, index) => (
-                                <div key={index} className='grid grid-cols-[auto_auto] z-20'>
+                                <div key={index} className='grid grid-cols-[auto_auto]'>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi h-10 mr-6 w-10 bi-gear-wide-connected" viewBox="0 0 16 16">
                                         <path d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"/>
                                     </svg>
@@ -74,10 +75,10 @@ const Home: NextPage = () => {
                         </div>
                     </div>
                 </section>
-                <section className='text-white relative py-28 bg-fixed bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .7)', backgroundImage: `url(${carImages[3]})`}}>
+                <section className='text-white relative py-10 lg:py-28 bg-fixed bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .7)', backgroundImage: `url(${carImages[3]})`}}>
                     <div className='text-center space-y-10 container px-10 lg:40 mx-auto'>
-                        <h1 style={{zIndex: 999}} className='font-bold text-5xl'>PREMIUM CAR SERVICE MATCHED WITH <br />GREAT WORKMANSHIP</h1>
-                        <p className='text-lg'>We offer a warranty on our administered workmanship on all vehicles so that our clients can be at ease, trusting that we deliver our best, so that they can be their best!</p>
+                        <h1 style={{zIndex: 999}} className='font-bold text-2xl md:text-5xl'>PREMIUM CAR SERVICE MATCHED WITH <br />GREAT WORKMANSHIP</h1>
+                        <p className='md:text-lg'>We offer a warranty on our administered workmanship on all vehicles so that our clients can be at ease, trusting that we deliver our best, so that they can be their best!</p>
                         <div>
                             <Link href='/contact'><a className='px-8 py-4 bg-red-600 text-white'>Get started</a></Link>
                         </div>
@@ -90,15 +91,15 @@ const Home: NextPage = () => {
                         {[...Array(6)].map((item, index) => (<div key={index} style={{backgroundImage: `url(${carImages[index]})`}} className='w-full bg-cover bg-no-repeat h-full'/>))}
                     </div>
                 </section>
-                <section className='text-white relative py-28 bg-fixed bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[1]})`}}>
+                <section className='text-white relative py-10 lg:py-28 bg-fixed bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[1]})`}}>
                     <div className='space-y-6 container px-10 lg:px-40 mx-auto z-10'>
-                        <h1 className='font-bold text-5xl'>Make appointment with <span className='block'>us now!</span></h1>
+                        <h1 className='font-bold text:3xl lg:text-5xl'>Make appointment with <span className='block'>us now!</span></h1>
                         <div>
-                            <p className='text-lg'>{storeInfo.fullLocation}</p>
-                            <p className='text-lg'>{storeInfo.phone}</p>
+                            <p className='lg:text-lg text-sm'>{storeInfo.fullLocation}</p>
+                            <p className='lg:text-lg text-sm'>{storeInfo.phone}</p>
                         </div>
-                        <h1 className='font-bold text-5xl'>Office</h1>
-                        <Link href='/contact'><a className='px-8 ml-20 block mt-10 w-fit py-4 bg-red-600 text-white font-bold uppercase'>Click Here</a></Link>
+                        <h1 className='font-bold text-3xl lg:text-5xl'>Office</h1>
+                        <Link href='/contact'><a className='px-8 ml-20 block mt-10 text-sm md:text-md w-fit py-4 bg-red-600 text-white font-bold uppercase'>Click Here</a></Link>
                     </div>
                 </section>
                 <br />
