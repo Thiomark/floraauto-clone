@@ -33,7 +33,7 @@ const Home: NextPage = () => {
     ];
 
     return (
-        <Layout backgroundImage={carImages[0]} title={storeInfo.name} imageText={<HeroSection />} imageHeight='h-[80vh]'>
+        <Layout backgroundImage={carImages[0]} title={storeInfo.name} imageText={<HeroSection />} imageHeight='h-[60vh] lg:h-[80vh]'>
             <main>
                 <section className='container mx-auto py-4 px-4 lg:py-24'>
                     <h1 className='uppercase text-red-600 text-2xl font-bold'>Who we are</h1>

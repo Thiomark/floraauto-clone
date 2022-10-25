@@ -8,7 +8,7 @@ const Services: NextPage = () => {
     const ourInfo = ['Experienced Technicians', 'Customer Satisfaction', 'Quality Services']
  
     return (
-        <Layout backgroundImage={carImages[7]} imageHeight='h-[60vh]'>
+        <Layout backgroundImage={carImages[7]} imageHeight='lg:h-[60vh] h-[40vh]'>
             <section className='mx-auto container py-10'>
                 <div className='grid lg:grid-cols-3 gap-10 px-10'>
                     <div className='flex flex-col justify-center'>

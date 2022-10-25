@@ -32,7 +32,7 @@ const Services: NextPage = () => {
     const ourProcessesImages = ['MakeAnAppointment.png', 'SelectServices.png', 'ExecutionProject.png'];
  
     return (
-        <Layout backgroundImage={carImages[7]} imageHeight='h-[60vh]'>
+        <Layout backgroundImage={carImages[7]} imageHeight='lg:h-[60vh] h-[40vh]'>
             <section className='mx-auto container py-10'>
                 <h1 className='text-brand font-bold text-lg uppercase text-center'>OUR SERVICES</h1>
                 <p className='text-3xl font-bold text-center uppercase text-gray-900 py-3'>GREAT CAR SERVICES</p>

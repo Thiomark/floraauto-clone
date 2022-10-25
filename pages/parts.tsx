@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import Image from 'next/image';
 import { useRef, useState } from 'react';
 import Layout from '../components/Layout';
 import { carImages } from '../utils/constants';
@@ -9,7 +10,7 @@ const Parts: NextPage = () => {
     const ref = useRef();
 
     return (
-        <Layout backgroundImage={carImages[1]} imageHeight='h-[60vh]'>
+        <Layout backgroundImage={carImages[1]} imageHeight='lg:h-[60vh] h-[40vh]'>
             <main className='container mx-auto px-4 py-6 grid md:gap-6 md:grid-cols-[230px_1fr] lg:grid-cols-[300px_1fr]'>
                 <div className='hidden md:block'>
                     <div className='bg-brand p-4 text-center text-gray-100'>
@@ -33,7 +34,9 @@ const Parts: NextPage = () => {
                     </div>
                     <div className='grid grid-cols-2 xl:grid-cols-3 gap-4'>
                         {[...Array(12)].map((item, index) => (<div className='border w-full' key={index}>
-                            <img src='https://africaboyzonline.com/gallery/00/02/01/00020102_00043354.jpg' className='w-full h-60'/>
+                            <div className='w-full h-60 relative'>
+                                <Image alt='' layout='fill' objectFit='cover' src='https://africaboyzonline.com/gallery/00/02/01/00020102_00043354.jpg' className='absolute'/>
+                            </div>
                             <div className='text-center'>
                                 <h1>lorem</h1>
                                 <p>Lorem ipsum dolor sit</p>
