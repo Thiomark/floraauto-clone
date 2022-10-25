@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         brand: 'rgb(220 38 38)'
-      }
+      },
     },
   },
   plugins: [],

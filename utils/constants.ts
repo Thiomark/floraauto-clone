@@ -1,11 +1,9 @@
-export const store_name = 'Subesh Auto Services';
-
 export const links = [
     {name: 'Home', url: '/'},
-    {name: 'Car-Parts', url: '/parts'},
+    {name: 'Car Parts', url: '/parts'},
     {name: 'About', url: '/about'},
     {name: 'Services', url: '/services'},
-    {name: 'ContactUs', url: '/contact'}
+    {name: 'Contact Us', url: '/contact'}
 ]
 
 export const carImages = [
@@ -18,3 +16,10 @@ export const carImages = [
     'https://images.pexels.com/photos/8478223/pexels-photo-8478223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
     'https://images.pexels.com/photos/8478223/pexels-photo-8478223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 ]
+
+export const storeInfo = {
+    name: 'Subesh Auto Services',
+    phone: '083 209 2668',
+    location: 'Hamberg, Roodepoort',
+    fullLocation: 'Eeufees Avenue, Hamberg Roodepoort'
+}

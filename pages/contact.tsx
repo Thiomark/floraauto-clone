@@ -15,7 +15,7 @@ const Contactus: NextPage = () => {
     }
     return (
         <Layout backgroundImage={carImages[1]} imageHeight='h-[60vh]'>
-            <div className='grid grid-cols-2 gap-10 container mx-auto'>
+            <div className='grid px-4 grid-cols-1 lg:grid-cols-2 gap-10 container mx-auto'>
                 <form className={formStyle}>
                     <h1 className='bg-red-600 text-white text-2xl p-4 font-bold col-span-2 text-center'>MESSAGE OR QUESTION</h1>
                     {firstForm.map((item, index) => {

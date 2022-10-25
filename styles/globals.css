@@ -15,6 +15,14 @@ a {
   box-sizing: border-box;
 }
 
+.icon {
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 255, 255)) saturate(1000%);
+}
+
+.icon-red {
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(220 38 38)) saturate(400%);
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

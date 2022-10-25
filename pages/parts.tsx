@@ -10,8 +10,8 @@ const Parts: NextPage = () => {
 
     return (
         <Layout backgroundImage={carImages[1]} imageHeight='h-[60vh]'>
-            <main className='container mx-auto py-6 grid gap-6 grid-cols-[300px_1fr]'>
-                <div>
+            <main className='container mx-auto px-4 py-6 grid md:gap-6 md:grid-cols-[230px_1fr] lg:grid-cols-[300px_1fr]'>
+                <div className='hidden md:block'>
                     <div className='bg-brand p-4 text-center text-gray-100'>
                         <h1>Categores</h1>
                     </div>
@@ -19,9 +19,9 @@ const Parts: NextPage = () => {
                         {categoies.map(item => (<li className='p-4 hover:bg-gray-100 text-center' key={item}>{item}</li>))}
                     </ul>
                 </div>
-                <div className='space-y-6'>
+                <div className='lg:space-y-6 space-y-4'>
                     <div>
-                        <div className='flex max-w-md'>
+                        <div className='flex md:max-w-lg'>
                             <input type="text" className='px-4 w-full py-2 border' placeholder='Search for parts...' />
                             <button className='bg-gray-300 px-4 text-white'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi w-5 h-5 bi-search-heart" viewBox="0 0 16 16">
@@ -31,7 +31,7 @@ const Parts: NextPage = () => {
                             </button>
                         </div>
                     </div>
-                    <div className='grid grid-cols-3 gap-4'>
+                    <div className='grid grid-cols-2 xl:grid-cols-3 gap-4'>
                         {[...Array(12)].map((item, index) => (<div className='border w-full' key={index}>
                             <img src='https://africaboyzonline.com/gallery/00/02/01/00020102_00043354.jpg' className='w-full h-60'/>
                             <div className='text-center'>
