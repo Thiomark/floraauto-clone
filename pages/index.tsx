@@ -7,9 +7,9 @@ import { ourServices } from '../utils/data';
 
 const HeroSection: NextPage = () => {
     return (
-        <div className='flex-1 px-20 container mx-auto flex text-white space-y-8 flex-col font-bold justify-center uppercase'>
-            <h1>BEST <span className='text-red-500 text-xl'>Car</span> REPAIR SERVICES <br/> DONE AT SUBESH AUTO SERVICES</h1>
-            <p className='text-5xl'>We are qualified & <span className='text-red-500 block'>Professional</span></p>
+        <div className='flex-1 px-10 container mx-auto flex text-white space-y-8 flex-col font-bold justify-center uppercase'>
+            <h1>BEST <span className='text-red-500 text-lg lg:text-xl'>Car</span> REPAIR SERVICES <br/> DONE AT SUBESH AUTO SERVICES</h1>
+            <p className='text-4xl lg:text-5xl'>We are qualified & <span className='text-red-500 block'>Professional</span></p>
             <button className='px-8 w-fit py-4 bg-red-600 text-white'>Get started</button>
         </div>
     )
@@ -44,11 +44,11 @@ const Home: NextPage = () => {
                         </div>))}
                     </div>
                 </section>
-                <section style={{backgroundImage: `url(${carImages[1]})`}} className='text-white after:z-10 relative bg-fixed after:bg-opacity-80 after:bg-black after:absolute after:w-full after:top-0 after:bottom-0 py-28'>
+                <section className='text-white relative py-10 px-4 bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[1]})`}}>
                     <div className='container mx-auto'>
-                        <div className='relative h-20 mb-20'>
-                            <h1 className='text-center font-bold uppercase text-red-600 -mt-12 text-2xl absolute z-30 w-full'>Our Services</h1>
-                            <h1 className='text-center font-bold uppercase text-4xl absolute z-30 w-full bottom-0'>GREAT CAR SERVICES BY SUBESH AUTO SERVICES</h1>
+                        <div className='py-10 space-y-6'>
+                            <h1 className='text-center font-bold uppercase text-red-600 -mt-12 text-2xl z-30 w-full'>Our Services</h1>
+                            <h1 className='text-center font-bold uppercase text-4xl z-30 w-full bottom-0'>GREAT CAR SERVICES BY SUBESH AUTO SERVICES</h1>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2 px-10 md:px-4 lg:grid-cols-3 gap-16'>
                             {ourServices.map((item, index) => (

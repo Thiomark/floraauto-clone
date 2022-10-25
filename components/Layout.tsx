@@ -30,7 +30,6 @@ const Layout: NextPage<Props> = ({children, title, backgroundImage, imageHeight,
             <div >
                 <header>
                     <div className='container hidden px-10 mx-auto bg-black text-gray-100 lg:flex items-center justify-between relative'>
-                        {/* <h1 className='text-4xl font-bold'>logo</h1> */}
                         <Image src={'/images/Logo.png'} alt='logo' width={110} height={110} />
                         <div className='flex space-x-10'>
                             <div className='grid items-center shrink-1 grid-cols-[auto_auto] grid-rows-2'>
