@@ -1,14 +1,21 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
+import { PartsContext } from '../providers/PartsProvider';
 import { carImages } from '../utils/constants';
 
 const Parts: NextPage = () => {
-    const [isSortByMenuOpen, setIsSortByMenuOpen] = useState(false);
+    const {fetchCarParts, carParts} = useContext(PartsContext);
     const categoies = ['AIR FILTER', 'TENSIONERS', 'WATER PUMPS', 'CV PARTS', 'AIR FLOW METERS', 'BODY PARTS AND MIRRORS' ,'ELECTRICAL PARTS'];
-    const ref = useRef();
-
+    
+    useEffect(() => {
+        if(carParts?.length === 0){
+            fetchCarParts?.();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    
     return (
         <Layout backgroundImage={carImages[1]} imageHeight='lg:h-[60vh] h-[40vh]'>
             <main className='container mx-auto px-4 py-6 grid md:gap-6 md:grid-cols-[230px_1fr] lg:grid-cols-[300px_1fr]'>
@@ -33,38 +40,40 @@ const Parts: NextPage = () => {
                         </div>
                     </div>
                     <div className='grid grid-cols-2 xl:grid-cols-3 gap-4'>
-                        {[...Array(12)].map((item, index) => (<div className='border w-full' key={index}>
+                        {carParts?.map((item, index) => (<div className='border w-full' key={index}>
                             <div className='w-full h-60 relative'>
-                                <Image alt='' layout='fill' objectFit='cover' src='https://africaboyzonline.com/gallery/00/02/01/00020102_00043354.jpg' className='absolute'/>
+                                <Image alt='' layout='fill' objectFit='cover' src={item.attributes.image.data[0]?.attributes.url} className='absolute'/>
+                                {/* <Image alt='' layout='fill' objectFit='cover' src={item.attributes.image.data[0]?.attributes.formats?.medium.url} className='absolute'/> */}
                             </div>
-                            <div className='text-center'>
-                                <h1>lorem</h1>
-                                <p>Lorem ipsum dolor sit</p>
-                                <h1 className='text-brand'>R 2000</h1>
+                            <div className='text-center p-4'>
+                                <h1 className='text-sm'>{item.attributes.title}</h1>
+                                <h1 className='text-brand font-bold text-sm'>R {item.attributes.price.toString()}</h1>
                             </div>
                         </div>))}
                     </div>
-                    <div className="flex justify-center">
-                        <a href="#" className="flex items-center border px-4 py-2 mx-1 text-gray-500 bg-white rounded-md cursor-not-allowed">
-                            previous
-                        </a>
+                    {carParts.length > 12 && (    
+                        <div className="flex justify-center">
+                            <a href="#" className="flex items-center border px-4 py-2 mx-1 text-gray-500 bg-white rounded-md cursor-not-allowed">
+                                previous
+                            </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
-                            1
-                        </a>
+                            <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
+                                1
+                            </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
-                            2
-                        </a>
+                            <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
+                                2
+                            </a>
 
-                        <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
-                            3
-                        </a>
+                            <a href="#" className="items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white">
+                                3
+                            </a>
 
-                        <a href="#" className="flex items-center px-4 border py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-brand hover:text-white">
-                            Next
-                        </a>
-                    </div>
+                            <a href="#" className="flex items-center px-4 border py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md hover:bg-brand hover:text-white">
+                                Next
+                            </a>
+                        </div>
+                    )}
                 </div>
             </main>
         </Layout>
