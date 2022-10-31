@@ -1,67 +1,44 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useReducer } from 'react';
 import { baseUrl } from '../utils/constants';
 import type { ReactNode } from 'react';
 import qs from 'qs';
+import { CarPartType, CartAction, CartState, PartsContextInterface, StrapiResponseType } from '../types/Parts';
 
-export type StrapiResponseType = {
-    data: Array<CarPartType>
-    meta: {
-        pagination: {
-            start: number,
-            limit: number,
-            total: number
-        }
-    }
-}
-
-export type CarPartType = {
-    id: number,
-    attributes: {
-        title: string,
-        description: string,
-        brand?: string,
-        price: number,
-        time: string,
-        image: {
-            data: Array<{
-                id: number,
-                attributes : {
-                    name: string,
-                    url: string,
-                    formats: {
-                        small : {
-                            url: string
-                        },
-                        medium : {
-                            url: string
-                        },
-                        thumbnail : {
-                            url: string
-                        }
-                    }
-                }
-            }>
-        },
-        category?: string
-    }
-}
-
-interface PartsContextInterface {
-    carParts: Array<CarPartType>
-    partsCount: Number
-    isLoading: boolean
-    search?: (searchKeyword : string) => void
-    fetchCarParts?: (start?: number, query?: string | undefined) => void
-}
+const defaultCartState: CartState = {amount: 0, count: 0, items: [], shippingPrice: [
+    {name: 'Standard shipping', price: 120}
+]}
 
 export const PartsContext = createContext<PartsContextInterface>({
     carParts: [],
+    cart: defaultCartState,
     partsCount: 0,
     isLoading: true
 });
 
+const CartReducer = (state: CartState, action: CartAction) => {
+    switch (action.type) {
+        case 'add':
+            return {
+                shippingPrice: state.shippingPrice,
+                count: state.items.length, 
+                amount: state.amount + action.payload.attributes.price,
+                items: [...state.items.filter(el => el.id !== action.payload.id), action.payload]
+            };
+        case 'remove':
+            return {
+                shippingPrice: state.shippingPrice,
+                count: state.items.length, 
+                amount: state.amount - action.payload.attributes.price,
+                items: state.items.filter(el => el.id !== action.payload.id)
+            };
+        default:
+            throw state;
+    }
+}
+
 export const PartsProvider = ({children} : {children : ReactNode}) => {
     const [carParts, setCarParts] = useState<Array<CarPartType>>([]);
+    const [cart, cartDispatch ] = useReducer(CartReducer, defaultCartState);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [partsCount, setPartsCount] = useState<Number>(0);
 
@@ -76,6 +53,14 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
         } catch (error) {
             setIsLoading(false);
         }
+    }
+
+    const addItemToCart = (item: CarPartType) => {
+        cartDispatch({payload: item, type: 'add'});
+    }
+
+    const removeItemToCart = (item: CarPartType) => {
+        cartDispatch({payload: item, type: 'remove'});
     }
 
     const search = async (searchKeyword : string) => {
@@ -114,7 +99,7 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
     }
 
     return (
-        <PartsContext.Provider value={{fetchCarParts, carParts, search, isLoading, partsCount}}>
+        <PartsContext.Provider value={{fetchCarParts, cart, carParts, removeItemToCart, addItemToCart, search, isLoading, partsCount}}>
             {children}
         </PartsContext.Provider>
     )

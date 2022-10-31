@@ -31,4 +31,8 @@ a {
   .pagination-btn {
     @apply items-center hidden border px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-white rounded-md sm:flex hover:bg-brand hover:text-white;
   }
+
+  .cart-table-header {
+    @apply font-semibold text-center text-gray-600 text-xs uppercase w-1/5;
+  }
 }
