@@ -45,11 +45,19 @@ const Layout: NextPage<Props> = ({children, title, backgroundImage, imageHeight,
                                 </svg>
                                 <h1 className='uppercase font-bold text-xs'>Call Us</h1> 
                                 <p className=''>{storeInfo.phone}</p>  
-                            </div>                        
+                            </div>          
+                            <Link href={'#'}>
+                                <a className='relative flex items-center justify-center'>
+                                    <span className='absolute top-0 right-0'>0</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-bag mr-3 h-6 w-6" viewBox="0 0 16 16">
+                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                                    </svg>
+                                </a>
+                            </Link>              
                         </div>
                     </div>
                     <div className={imageHeight + ' flex flex-col relative bg-center bg-no-repeat bg-cover bg'} style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${backgroundImage})`}}>
-                        <div className='flex justify-between h-14 relative px-4 lg:px-0 lg:justify-start items-center bg-black container mx-auto lg:border-t'>
+                        <div className='flex justify-between h-14 relative px-4 lg:px-0 lg:justify-start items-center bg-black container pt-1.5 mx-auto lg:border-t'>
                             <div className={`bg-brand ${showMenu ? 'block' : 'hidden'} left-0 right-0 py-6 lg:py-0 top-14 absolute lg:static z-10 w-full flex-1 lg:flex items-center justify-center`}>
                                 <nav>
                                     <ul className='lg:flex text-center lg:space-x-4'>
