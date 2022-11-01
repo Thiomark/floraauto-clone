@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useContext, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { PartsContext } from '../providers/PartsProvider';
 import { links, carImages, storeInfo } from '../utils/constants';
 
@@ -30,6 +31,7 @@ const Layout: NextPage<Props> = ({children, title, backgroundImage, imageHeight,
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div >
+                <ToastContainer />
                 <header>
                     <div className='container hidden px-10 mx-auto bg-black text-gray-100 lg:flex items-center justify-between relative'>
                         <Image src={'/images/Logo.png'} alt='logo' width={110} height={110} />

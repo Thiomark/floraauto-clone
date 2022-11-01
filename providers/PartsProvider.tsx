@@ -3,6 +3,7 @@ import { baseUrl } from '../utils/constants';
 import type { ReactNode } from 'react';
 import qs from 'qs';
 import { CarPartType, CartAction, CartState, PartsContextInterface, StrapiResponseType } from '../types/Parts';
+import { toast } from 'react-toastify';
 
 const defaultCartState: CartState = {amount: 0, count: 0, items: [], shippingPrice: [
     {name: 'Standard shipping', price: 120}
@@ -18,6 +19,7 @@ export const PartsContext = createContext<PartsContextInterface>({
 const CartReducer = (state: CartState, action: CartAction) => {
     switch (action.type) {
         case 'add':
+            toast("Item added to cart")
             return {
                 shippingPrice: state.shippingPrice,
                 count: state.items.length, 
@@ -32,7 +34,7 @@ const CartReducer = (state: CartState, action: CartAction) => {
                 items: state.items.filter(el => el.id !== action.payload.id)
             };
         default:
-            throw state;
+            return state;
     }
 }
 

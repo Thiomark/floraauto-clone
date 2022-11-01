@@ -35,4 +35,8 @@ a {
   .cart-table-header {
     @apply font-semibold text-center text-gray-600 text-xs uppercase w-1/5;
   }
+
+  .apt-form {
+    @apply gap-6 gap-y-10 h-fit py-10 grid grid-cols-2;
+  }
 }
