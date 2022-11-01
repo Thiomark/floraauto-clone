@@ -49,7 +49,6 @@ const Contactus: NextPage = () => {
                     toast("Message not sent!");
                 });
         }
-        console.log({data: appointmentForm})
         axios.post(`${baseUrl}/appointments`, {data: appointmentForm})
             .then(function (response) {
                 toast("Appointment sent!");

@@ -9,6 +9,11 @@ export type StrapiResponseType = {
     }
 }
 
+export interface CartType extends CarPartType {
+    quantity: number
+    total: number
+}
+
 export enum CartActionKind {
     add = 'add',
     remove = 'remove',
@@ -16,13 +21,13 @@ export enum CartActionKind {
 
 // An interface for our actions
 export type CartAction = 
-    | { type: 'add', payload: CarPartType}
-    | { type: 'remove', payload: CarPartType}
+    | { type: 'add', payload: CartType}
+    | { type: 'remove', payload: CartType}
 
 export type CartState = {
     amount: number
     count: number
-    items: Array<CarPartType>
+    items: Array<CartType>
     shippingPrice: Array<{
         name: string,
         price: number
@@ -66,8 +71,8 @@ export interface PartsContextInterface {
     partsCount: Number
     isLoading: boolean
     cart: CartState
-    removeItemToCart?: (item: CarPartType) => void
-    addItemToCart?: (item: CarPartType) => void
+    removeItemFromCart?: (item: CartType) => void
+    addItemToCart?: (item: CartType) => void
     search?: (searchKeyword : string) => void
     fetchCarParts?: (start?: number, query?: string | undefined) => void
 }

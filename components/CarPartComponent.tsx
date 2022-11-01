@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { FC, useContext } from 'react';
-import { CarPartType } from '../types/Parts';
+import { CarPartType, CartType } from '../types/Parts';
 import { PartsContext } from '../providers/PartsProvider';
 import { currencyFormatter } from '../utils/helperFunctions';
 
@@ -16,7 +16,7 @@ export const CarPartSkeleton: FC = () => {
     )
 }
 
-const CarPartComponent: FC<CarPartType> = (item: CarPartType) => {
+const CarPartComponent: FC<CartType> = (item: CartType) => {
     const { addItemToCart } = useContext(PartsContext);
     
     return (

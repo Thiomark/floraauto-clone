@@ -1,39 +1,36 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FC, useContext } from 'react';
+import { ChangeEvent, FC, useContext } from 'react';
 import Layout from '../components/Layout';
-import { CarPartType } from '../types/Parts';
+import { CartType } from '../types/Parts';
 import { PartsContext } from '../providers/PartsProvider';
 import { carImages } from '../utils/constants';
 import { currencyFormatter } from '../utils/helperFunctions';
 
-const CartItem: FC<CarPartType> = ({attributes}) => {
+interface Item {
+    item: CartType
+}
+
+const CartItem: FC<Item> = ({item}) => {
+    const {removeItemFromCart, addItemToCart} = useContext(PartsContext);
     return (
         <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
             <div className="flex w-2/5">
                 <div className="w-20 h-24 relative">
-                    <Image alt='' layout='fill' objectFit='cover' src={attributes.image.data[0]?.attributes.url} className='absolute'/>
+                    <Image alt='' layout='fill' objectFit='cover' src={item.attributes.image.data[0]?.attributes.url} className='absolute'/>
                 </div>
                 <div className="flex flex-col justify-between ml-4 flex-grow">
-                    <span className="font-bold text-sm">{attributes.title}</span>
-                    <span className="text-red-500 text-xs">{attributes.brand}</span>
-                    <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                    <span className="font-bold text-sm">{item.attributes.title}</span>
+                    <span className="text-red-500 text-xs">{item.attributes.brand}</span>
+                    <button onClick={() => removeItemFromCart?.(item)} className="font-semibold w-fit hover:text-red-500 text-gray-500 text-xs">Remove</button>
                 </div>
             </div>
             <div className="flex justify-center w-1/5">
-                <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
-
-                <input className="mx-2 border text-center w-8" type="text" value="1" />
-
-                <svg className="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                </svg>
+                <input className="mx-2 w-20 py-2 border text-center" onChange={(event: ChangeEvent<HTMLInputElement>) => {}} type="number" defaultValue={item.quantity} />
             </div>
-            <span className="text-center w-1/5 font-semibold text-sm">{currencyFormatter.format(attributes.price)}</span>
-            <span className="text-center w-1/5 font-semibold text-sm">$400.00</span>
+            <span className="text-center w-1/5 font-semibold text-sm">{currencyFormatter.format(item.attributes.price)}</span>
+            <span className="text-center w-1/5 font-semibold text-sm">{currencyFormatter.format(item.total)}</span>
         </div>
     )
 }
@@ -41,8 +38,21 @@ const CartItem: FC<CarPartType> = ({attributes}) => {
 const Cart: NextPage = () => {
     const {cart} = useContext(PartsContext);
 
+    if(cart.items.length === 0) {
+        return (<Layout backgroundImage={carImages[1]} imageHeight='h-[40vh]'>
+                <div className='min-h-[40vh] flex flex-col items-center justify-center'>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi h-20 w-20 bi-cart-x" viewBox="0 0 16 16">
+                        <path d="M7.354 5.646a.5.5 0 1 0-.708.708L7.793 7.5 6.646 8.646a.5.5 0 1 0 .708.708L8.5 8.207l1.146 1.147a.5.5 0 0 0 .708-.708L9.207 7.5l1.147-1.146a.5.5 0 0 0-.708-.708L8.5 6.793 7.354 5.646z"/>
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                    </svg>
+                    <h1 className='my-10'>Cart Empty</h1>
+                    <Link href='/parts'><a className='py-3 px-10 bg-brand text-white'>Shop Now</a></Link>
+                </div>
+            </Layout>)
+    }
+
     return (
-        <Layout backgroundImage={carImages[1]} imageHeight='lg:h-[60vh] h-[40vh]'>
+        <Layout backgroundImage={carImages[1]} imageHeight='h-[40vh]'>
             <div className="container mx-auto mt-10 flex my-10">
                 <div className="w-3/4 px-10 py-10 flex flex-col">
                     <div className="flex justify-between border-b pb-8">
@@ -56,7 +66,7 @@ const Cart: NextPage = () => {
                         <h3 className="cart-table-header">Total</h3>
                     </div>
                     <div className='flex-1'>
-                        {cart.items.map((itm, index) => <CartItem attributes={itm.attributes} id={itm.id} key={index} />)}
+                        {cart.items.map((itm, index) => <CartItem item={itm} key={index} />)}
                     </div>
                     <Link href={'/parts'}>
                         <a className="flex font-semibold text-brand text-sm mt-10">
@@ -88,7 +98,7 @@ const Cart: NextPage = () => {
                     <div className="border-t mt-8">
                         <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                             <span>Total cost</span>
-                            <span>{currencyFormatter.format(cart.amount)}</span>
+                            <span>{currencyFormatter.format(cart.amount + 120)}</span>
                         </div>
                         <button className="bg-gray-500 font-semibold hover:bg-gray-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
                     </div>

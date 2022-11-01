@@ -19,7 +19,7 @@ const Parts: NextPage = () => {
     }, []);
 
     return (
-        <Layout backgroundImage={carImages[1]} imageHeight='lg:h-[60vh] h-[40vh]'>
+        <Layout backgroundImage={carImages[1]} imageHeight='h-[40vh]'>
             <main className='container mx-auto min-h-[90vh] px-4 py-6 grid md:gap-6 md:grid-cols-[1fr_300px]'>
                 <div className='lg:space-y-6 space-y-4'>
                     <div>
@@ -42,7 +42,7 @@ const Parts: NextPage = () => {
                     <div className='grid grid-cols-2 xl:grid-cols-3 gap-4'>
                         {isLoading ? 
                             [...Array(9)].map((item, index) => <CarPartSkeleton key={index}/>) :
-                            carParts?.map((item, index) => <CarPartComponent key={index} attributes={item.attributes} id={item.id} />)
+                            carParts?.map((item, index) => <CarPartComponent key={index} attributes={item.attributes} id={item.id} quantity={0} total={0} />)
                         }
                     </div>
                     <PaginationComponent />
