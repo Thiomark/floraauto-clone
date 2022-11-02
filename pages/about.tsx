@@ -6,6 +6,7 @@ import { carImages } from '../utils/constants';
 const Services: NextPage = () => {
 
     const ourInfo = ['Experienced Technicians', 'Customer Satisfaction', 'Quality Services']
+    const ourExp = [95, 80, 92]
  
     return (
         <Layout backgroundImage={carImages[7]} imageHeight='lg:h-[60vh] h-[40vh]'>
@@ -28,10 +29,12 @@ const Services: NextPage = () => {
                         {ourInfo.map((item, index) => {
                             return (
                                 <div key={index} className='flex'>
-                                    <h1>0%</h1>
+                                    <h1>{ourExp[index]} %</h1>
                                     <div className='flex-1 ml-2'>
                                         <h1 className='mb-1 font-bold'>{item}</h1>
-                                        <div className='h-[15px] bg-gray-200 w-full' />
+                                        <div className='h-[15px] bg-gray-200 w-full relative' >
+                                            <div style={{ width: ourExp[index] + '%'}} className={`bg-brand h-full z-10 absolute`}/>
+                                        </div>
                                     </div>
                                 </div>
                             )

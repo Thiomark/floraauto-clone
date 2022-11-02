@@ -47,7 +47,7 @@ const Parts: NextPage = () => {
                     </div>
                     <PaginationComponent />
                 </div>
-                <div className='hidden md:block'>
+                <div className='hidden md:block invisible'>
                     <div className='bg-brand p-4 text-center text-gray-100'>
                         <h1>Categores</h1>
                     </div>

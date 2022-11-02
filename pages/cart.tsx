@@ -30,7 +30,7 @@ const CartItem: FC<Item> = ({item}) => {
                 <input className="mx-2 w-20 py-2 border text-center" onChange={(event: ChangeEvent<HTMLInputElement>) => {}} type="number" defaultValue={item.quantity} />
             </div>
             <span className="text-center w-1/5 font-semibold text-sm">{currencyFormatter.format(item.attributes.price)}</span>
-            <span className="text-center w-1/5 font-semibold text-sm">{currencyFormatter.format(item.total)}</span>
+            <span className="text-center w-1/5 font-semibold text-sm invisible">{currencyFormatter.format(item.total)}</span>
         </div>
     )
 }
@@ -63,7 +63,7 @@ const Cart: NextPage = () => {
                         <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
                         <h3 className="cart-table-header">Quantity</h3>
                         <h3 className="cart-table-header">Price</h3>
-                        <h3 className="cart-table-header">Total</h3>
+                        <h3 className="cart-table-header invisible">Total</h3>
                     </div>
                     <div className='flex-1'>
                         {cart.items.map((itm, index) => <CartItem item={itm} key={index} />)}
