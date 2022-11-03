@@ -14,15 +14,17 @@ export interface CartType extends CarPartType {
     total: number
 }
 
-export enum CartActionKind {
-    add = 'add',
-    remove = 'remove',
-}
+// export enum CartActionKind {
+//     add = 'add',
+//     remove = 'remove'
+// }
 
 // An interface for our actions
 export type CartAction = 
     | { type: 'add', payload: CartType}
     | { type: 'remove', payload: CartType}
+    | { type: 'seed', payload: CartState}
+    | { type: 'erase'}
 
 export type CartState = {
     amount: number
@@ -71,6 +73,7 @@ export interface PartsContextInterface {
     partsCount: Number
     isLoading: boolean
     cart: CartState
+    clearCart? : () => void
     removeItemFromCart?: (item: CartType) => void
     addItemToCart?: (item: CartType) => void
     search?: (searchKeyword : string) => void

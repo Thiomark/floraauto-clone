@@ -1,9 +1,12 @@
-import { createContext, useState, useReducer } from 'react';
+import { createContext, useState, useReducer, useEffect } from 'react';
 import { baseUrl } from '../utils/constants';
 import type { ReactNode } from 'react';
 import qs from 'qs';
 import { CarPartType, CartAction, CartState, CartType, PartsContextInterface, StrapiResponseType } from '../types/Parts';
 import { toast } from 'react-toastify';
+import { cart } from '../utils/data';
+
+// const defaultCartState: CartState = cart
 
 const defaultCartState: CartState = {amount: 0, count: 0, items: [], shippingPrice: [
     {name: 'Standard shipping', price: 120}
@@ -18,6 +21,10 @@ export const PartsContext = createContext<PartsContextInterface>({
 
 const CartReducer = (state: CartState, action: CartAction) => {
     switch (action.type) {
+        case 'seed': 
+            return action.payload
+        case 'erase':
+            return defaultCartState
         case 'add':
             toast("Item added to cart")
             return {
@@ -31,6 +38,7 @@ const CartReducer = (state: CartState, action: CartAction) => {
                 }]
             };
         case 'remove':
+            toast("Item removed from cart")
             return {
                 shippingPrice: state.shippingPrice,
                 count: state.count - 1, 
@@ -48,10 +56,23 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [partsCount, setPartsCount] = useState<Number>(0);
 
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
+    // useEffect(() => {
+    //     // @ts-ignore
+    //     const cart = JSON.parse(localStorage.getItem("cart"))
+    //     if(cart){
+    //         seedSavedCart(cart);
+    //     }
+    // }, []);
+
     const fetchCarParts = async (start = 0) => {
         try {
             setIsLoading(true);
-            const res = await fetch(`${baseUrl}/products?populate=*&sort[0]=createdAt:desc&pagination[start]=${start}&pagination[limit]=12`);
+            //orders?filters[isActive][$eq]=true
+            const res = await fetch(`${baseUrl}/products?filters[isActive][$eq]=true&populate=*&sort[0]=createdAt:desc&pagination[start]=${start}&pagination[limit]=12`);
             const {data, meta}: StrapiResponseType = await res.json();
             setCarParts(data);
             setPartsCount(meta.pagination.total);
@@ -67,6 +88,10 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
 
     const removeItemFromCart = (item: CartType) => {
         cartDispatch({payload: item, type: 'remove'});
+    }
+
+    const clearCart = () => {
+        cartDispatch({type: 'erase'});
     }
 
     const search = async (searchKeyword : string) => {
@@ -105,7 +130,7 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
     }
 
     return (
-        <PartsContext.Provider value={{fetchCarParts, cart, carParts, removeItemFromCart, addItemToCart, search, isLoading, partsCount}}>
+        <PartsContext.Provider value={{fetchCarParts, cart, carParts, removeItemFromCart, clearCart, addItemToCart, search, isLoading, partsCount}}>
             {children}
         </PartsContext.Provider>
     )

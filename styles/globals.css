@@ -37,6 +37,14 @@ a {
   }
 
   .apt-form {
-    @apply gap-6 gap-y-10 h-fit py-10 grid grid-cols-2;
+    @apply gap-6 gap-y-10 h-fit py-10 grid grid-cols-1 md:grid-cols-2;
+  }
+
+  .form-input {
+    @apply p-4 border border-gray-200 text-sm bg-gray-50
+  }
+
+  .my-btn {
+    @apply text-sm bg-black text-white py-3 rounded px-8 w-fit
   }
 }

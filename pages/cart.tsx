@@ -100,7 +100,7 @@ const Cart: NextPage = () => {
                             <span>Total cost</span>
                             <span>{currencyFormatter.format(cart.amount + 120)}</span>
                         </div>
-                        <button className="bg-gray-500 font-semibold hover:bg-gray-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+                       <Link href={'/checkout'}><a className="bg-gray-800 font-semibold hover:bg-gray-900 py-3 px-10 text-sm text-white uppercase w-full">Checkout</a></Link>
                     </div>
                 </div>
             </div>

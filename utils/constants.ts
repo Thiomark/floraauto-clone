@@ -6,8 +6,8 @@ export const links = [
     {name: 'Contact Us', url: '/contact'}
 ]
 
-export const baseUrl = 'https://subesh.onrender.com/api'
-// export const baseUrl = 'http://localhost:1337/api'
+// export const baseUrl = 'https://subesh.onrender.com/api'
+export const baseUrl = 'http://localhost:1337/api'
 
 export const carImages = [
     'https://images.pexels.com/photos/3807120/pexels-photo-3807120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

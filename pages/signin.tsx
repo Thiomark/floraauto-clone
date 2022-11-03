@@ -3,12 +3,14 @@ import Link from 'next/link';
 import { ChangeEvent, useContext, useState } from 'react';
 import Layout from '../components/Layout';
 import { AuthContext, UserAuthType } from '../providers/AuthProvider';
-import { signIn} from 'next-auth/react'
+import { signIn} from 'next-auth/react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 const SignIn: NextPage = () => {
     const { loading, signIn: usernameAndPasswordSignIn } = useContext(AuthContext);
     const [credentials, setCrdentails] = useState<UserAuthType>({identifier: '', password: ''});
+    
 
     return (
         <Layout headerMinimal imageHeight=''>
