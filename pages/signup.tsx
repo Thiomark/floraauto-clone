@@ -2,13 +2,14 @@ import { NextPage } from 'next';
 import Link from 'next/link';
 import { ChangeEvent, useContext, useState } from 'react';
 import Layout from '../components/Layout';
-import { AuthContext, UserAuthType } from '../providers/AuthProvider';
+import { AuthContext } from '../providers/AuthProvider';
 import { signIn} from 'next-auth/react'
 import Image from 'next/image';
+import { UserAuthType } from '../types/User';
 
 const SignIn: NextPage = () => {
     const { loading, signUp } = useContext(AuthContext);
-    const [credentials, setCrdentails] = useState<UserAuthType>({email: '', password: '', username: '', name: ''});
+    const [credentials, setCrdentails] = useState<UserAuthType>({email: '', password: '', username: ''});
 
     return (
         <Layout headerMinimal imageHeight=''>
@@ -21,9 +22,6 @@ const SignIn: NextPage = () => {
                         <h1 className='text-3xl font-bold'>Sign Up</h1>
                         <Link href='/signin'><a className='underline text-blue-600 text-sm'>already have an account</a></Link>
                     </div>
-                    <input value={credentials.name} onChange={(event: ChangeEvent<HTMLInputElement>) => setCrdentails(prev => ({
-                            ...prev, name: event.target.value
-                        }))} required className={`p-4 border rounded text-sm col-span-2 w-full border-gray-200 bg-transparent`} placeholder='Name'/>
                     <input value={credentials.username} onChange={(event: ChangeEvent<HTMLInputElement>) => setCrdentails(prev => ({
                             ...prev, username: event.target.value
                         }))} required className={`p-4 border rounded text-sm col-span-2 w-full border-gray-200 bg-transparent`} placeholder='Username'/>

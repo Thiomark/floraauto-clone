@@ -2,8 +2,7 @@ import axios from 'axios';
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { baseUrl } from '../utils/constants';
-import { singleUser, orders as saveOrders} from '../utils/data';
-import { CreateOrderResponseType, CreateOrderType, OrderType, User, UserAuthType } from '../types/User';
+import { CreateOrderResponseType, User, UserAuthType } from '../types/User';
 
 const defaultState = {
     user: null,
@@ -124,7 +123,7 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
         setLoading(true);
         axios.post(`${baseUrl}/auth/local/register`, user)
             .then(function (response) {
-                setUser(response.data.user)
+                setUser(response.data)
                 Router.push('/')
                 setLoading(false);
             })

@@ -98,7 +98,7 @@ const Contactus: NextPage = () => {
                     <input type='date' onChange={(event: ChangeEvent<HTMLInputElement>) => setAppointmentForm(prev => ({
                         ...prev, date: event.target.value
                     }))} required className={`p-4 border border-gray-200 bg-gray-50`} placeholder='Date'/>
-                    <input type='' onChange={(event: ChangeEvent<HTMLInputElement>) => setAppointmentForm(prev => ({
+                    <input type='time' onChange={(event: ChangeEvent<HTMLInputElement>) => setAppointmentForm(prev => ({
                         ...prev, time: event.target.value
                     }))} required className={`p-4 border border-gray-200 bg-gray-50`} placeholder='Time'/>
                     <textarea onChange={( event: ChangeEvent<HTMLTextAreaElement>) => setAppointmentForm(prev => ({
