@@ -2,7 +2,15 @@ import axios from 'axios';
 import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { baseUrl } from '../utils/constants';
-import { CreateOrderResponseType, User, UserAuthType } from '../types/User';
+import { CreateOrderResponseType, User } from '../types/User';
+
+type UserAuthType = {
+    name?: string
+    username?: string
+    email?: string
+    identifier?: string
+    password: string
+}
 
 const defaultState = {
     user: null,
@@ -163,6 +171,7 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
                 else Router.push(`/`);
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     useEffect(() => {
@@ -176,6 +185,7 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
                 }
             }
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
     useEffect(() => {
@@ -189,7 +199,8 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
                 }
             }
         }
-    }, [router.pathname]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [router.pathname, router.query.redirect, user]);
 
     return (
         <AuthContext.Provider value={{user, loading, placeOrder, updateUser, order, orders, fetchOrders, fetchOrder, signIn, signOut, signUp}}>

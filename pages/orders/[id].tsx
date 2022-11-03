@@ -12,8 +12,10 @@ const Order = () => {
 
     useEffect(() => {
         const {id} = router.query
-        fetchOrder?.(id + '');
-    }, [])
+        if(id && !order){
+            fetchOrder?.(id + '');
+        }
+    }, [fetchOrder, order, router.query]);
     
 
     return (
@@ -25,8 +27,8 @@ const Order = () => {
                         <div>
                             <h1 className='text-md font-bold'>Order #{order.id}</h1>
                             <div className='text-xs space-x-3 flex items-center'>
-                                <h1 className='uppercase text-gray-500'>ordered: {format(new Date(order.attributes.createdAt || ''), 'PP')}</h1>
-                                <h1 className='uppercase text-gray-500'>Paid: {format(new Date(order.attributes.createdAt || ''), 'PP')}</h1>
+                                <h1 className='uppercase text-gray-500'>ordered: {order?.attributes?.createdAt && format(new Date(order.attributes.createdAt || ''), 'PP')}</h1>
+                                <h1 className='uppercase text-gray-500'>Paid: {order?.attributes?.createdAt && format(new Date(order.attributes.createdAt || ''), 'PP')}</h1>
                             </div>
                             <div className='grid gap-4 divide-y grid-rows-[auto_auto_auto_auto]'>
                                 {order.attributes.shippedAt ? <h1 className='font-bold text-md text-gray-800 mt-4 boder-b'>Delivered {format(new Date(order.attributes.shippedAt || ''), 'PP')}</h1> : <h1 className='font-bold text-md text-gray-800 mt-4 boder-b'>Not Delivered</h1>}
