@@ -3,6 +3,19 @@ import { createContext, FC, ReactNode, useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import { baseUrl } from '../utils/constants';
 import { CreateOrderResponseType, User } from '../types/User';
+import { toast } from 'react-toastify';
+
+type StrapiError = {
+    response: {
+        data?: string
+        error: {
+            status: number
+            name: string
+            message: string
+            details: any
+        }
+    }
+}
 
 type UserAuthType = {
     name?: string
@@ -81,20 +94,6 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
             });
     }
 
-    const signIn = (user: UserAuthType) => {
-        setLoading(true);
-        axios.post(`${baseUrl}/auth/local`, user)
-            .then(function (response) {
-                setUser(response.data);
-                if(router.query.redirect) return Router.push(`/${router.query.redirect}`);
-                Router.push('/');
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setLoading(false);
-            });
-    }
-
     const fetchOrders = () => {
         if(user?.jwt){
             axios.get(`${baseUrl}/orders?filters[user_id][$eq]=${user.user.id}`, {
@@ -122,6 +121,22 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
         });
     }
 
+    const signIn = (user: UserAuthType) => {
+        if( loading ) return;
+        setLoading(true);
+        axios.post(`${baseUrl}/auth/local`, user)
+            .then(function (response) {
+                setUser(response.data);
+                if(router.query.redirect) return Router.push(`/${router.query.redirect}`);
+                Router.push('/');
+                setLoading(false);
+            })
+            .catch(function (error) {
+                toast.error('invalid credentials');
+                setLoading(false);
+            });
+    }
+
     const signOut = () => {
         localStorage.removeItem('user');
         setUser(null);
@@ -136,6 +151,11 @@ export const AuthProvider: FC<Props> = ({children} : Props) => {
                 setLoading(false);
             })
             .catch(function (error) {
+                if (error?.response?.data?.error?.message) {
+                    toast.error(error?.response?.data?.error?.message);
+                } else {
+                    toast.error('Something wrong happpned');
+                }
                 setLoading(false);
             });
     }

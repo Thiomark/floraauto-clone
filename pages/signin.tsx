@@ -3,9 +3,6 @@ import Link from 'next/link';
 import { ChangeEvent, useContext, useState } from 'react';
 import Layout from '../components/Layout';
 import { AuthContext } from '../providers/AuthProvider';
-import { signIn} from 'next-auth/react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 type UserAuthType = {
     name?: string

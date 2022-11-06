@@ -60,14 +60,6 @@ export const PartsProvider = ({children} : {children : ReactNode}) => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    // useEffect(() => {
-    //     // @ts-ignore
-    //     const cart = JSON.parse(localStorage.getItem("cart"))
-    //     if(cart){
-    //         seedSavedCart(cart);
-    //     }
-    // }, []);
-
     const fetchCarParts = async (start = 0) => {
         try {
             setIsLoading(true);
