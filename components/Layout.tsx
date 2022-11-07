@@ -32,6 +32,7 @@ const Layout: NextPage<Props> = ({children, title, backgroundImage, imageHeight,
             </Head>
             <div className='min-h-screen flex flex-col'>
                 <ToastContainer />
+                <Header />
                 <OldHeader backgroundImage={backgroundImage} imageHeight={imageHeight} headerMinimal={headerMinimal} imageText={imageText}/>
                 <div className='flex-1'>
                     {children}
@@ -42,6 +43,104 @@ const Layout: NextPage<Props> = ({children, title, backgroundImage, imageHeight,
     )
 }
 
+export const Header = () => {
+    const [showMenu, setShowMenu] = useState(false);
+    const { user, signOut } = useContext(AuthContext);
+    const { cart } = useContext(PartsContext);
+    const router = useRouter();
+
+    const HeaderTitle = () => {
+        let key = ''
+        if (router.pathname === '/') key = 'Home';
+        else if (router.pathname === '/parts') key = 'Home';
+        else if (router.pathname === '/about') key = 'About';
+        else if (router.pathname === '/services') key = 'Services';
+        else if (router.pathname === '/contact') key = 'Appointment';
+        else if (router.pathname === '/cart') key = 'Cart';
+        else if (router.pathname === '/profile') key = 'Profile';
+        else if (router.pathname === '/signin') key = 'Sign In';
+        else if (router.pathname === '/signup') key = 'Sign Up';
+        else key = router.pathname;
+
+        return <h1 className='mobile ml-6'>{key}</h1>
+    }
+
+    const otherLinks = [
+        {name: 'Profile', showUsername: true, url: '/profile', svg: () => (
+            <>
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+            </>
+        )},
+        {name: 'cart', url: '/cart', svg: () => (
+            <>
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>    
+            </>
+        )}
+    ]
+    return <header className='lg:hidden'>
+        <div onClick={(e: any) => {
+            e.stopPropagation();
+            setShowMenu(false)
+        }} className={`${showMenu && 'h-screen z-40 flex flex-col bg-black bg-opacity-70 absolute top-0 bottom-0 right-0 left-0'}`}>
+            {<div className='w-full mb-4 py-3 flex justify-between items-center shadow bg-white px-4'>
+                <div className='flex items-center'>
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        setShowMenu(true)
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi w-7 h-7 bi-list" viewBox="0 0 16 16">
+                            <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                    </button>
+                    {HeaderTitle()}
+                </div>
+                <ul className='flex items-center space-x-4'>
+                    {otherLinks.map((headeItem, index) => {
+                        return <li key={index}>
+                            <Link href={headeItem.url}>
+                        <a className='flex items-center'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-6 w-6" viewBox="0 0 16 16">
+                                {headeItem.svg()}
+                            </svg>
+                        </a>
+                    </Link>  
+                        </li>
+                    })}
+                </ul>
+            </div>}
+            {showMenu && <div className='bg-white z-50 flex flex-col w-3/5 fixed top-0 bottom-0'>
+                <div className='bg-black w-full px-4 flex items-center justify-center'>
+                    <Link href={'/'}><Image className='cursor-pointer' src={'/images/Logo.png'} alt='logo' width={80} height={80} /></Link>
+                </div>
+                <ul className='flex-1 relative p-8 space-y-4'>
+                    {links.map((headeItem, index) => {
+                        return <li key={index}><Link href={headeItem.url}><a className='text-sm'>{headeItem.name}</a></Link></li>
+                    })}
+                    <ul className='absolute right-0 left-0 bottom-0 py-2'>
+                        {user && <button onClick={() => signOut?.()} className='relative flex w-full items-center space-x-4 px-4 py-2'>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-6 w-6" viewBox="0 0 16 16">
+                                <path fillRule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                <path fillRule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            <span className='text-sm'>Logout</span>
+                        </button>}
+                        {user && <Link href={'/orders'}>
+                            <a className='relative flex w-full items-center space-x-4 px-4 py-2'>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-6 w-6" viewBox="0 0 16 16">
+                                    <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                <span className='text-sm'>My Orders</span>
+                            </a>
+                        </Link> }
+                    </ul>
+                </ul>
+            </div>}
+        </div>
+    </header>
+}
+
 export const OldHeader = ({backgroundImage, imageHeight, imageText, headerMinimal} : any) => {
     const [showMenu, setShowMenu] = useState(false);
     const { cart } = useContext(PartsContext);
@@ -49,7 +148,7 @@ export const OldHeader = ({backgroundImage, imageHeight, imageText, headerMinima
     const router = useRouter();
 
     return (
-    <header className={headerMinimal ? 'bg-black' : ''}>
+    <header className={`${headerMinimal ? 'bg-black' : ''} hidden lg:block`}>
         <div className='container hidden px-10 mx-auto bg-black text-gray-100 lg:flex items-center justify-between relative'>
             <Link href={'/'}><Image className='cursor-pointer' src={'/images/Logo.png'} alt='logo' width={110} height={110} /></Link>
             <div className='flex space-x-8'>
@@ -125,7 +224,7 @@ export const OldHeader = ({backgroundImage, imageHeight, imageText, headerMinima
 
 export const Footer = () => {
     return (
-        <footer className='text-white relative py-10 bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[6]})`}}>
+        <footer className='text-white desktop relative py-10 bg-no-repeat bg-cover' style={{boxShadow: 'inset 0 0 0 100vw rgba(0,0,0, .8)', backgroundImage: `url(${carImages[6]})`}}>
             <div className="container px-6 py-8 mx-auto">
                 <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     <div>

@@ -20,7 +20,7 @@ const Parts: NextPage = () => {
 
     return (
         <Layout backgroundImage={carImages[1]} imageHeight='h-[40vh]'>
-            <main className='container mx-auto min-h-[90vh] px-4 py-6 grid md:gap-6 md:grid-cols-[1fr_300px]'>
+            <main className='container mx-auto min-h-[90vh] px-4 lg:py-6 pb-6 grid md:gap-6 md:grid-cols-[1fr_300px]'>
                 <div className='lg:space-y-6 space-y-4'>
                     <div>
                         <div className='flex md:max-w-lg'>

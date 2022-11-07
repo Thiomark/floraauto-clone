@@ -24,10 +24,10 @@ const CarPartComponent: FC<CartType> = (item: CartType) => {
             <div className='w-full h-60 relative'>
                 <Image alt='' layout='fill' objectFit='cover' src={item.attributes.image.data[0]?.attributes.url} className='absolute'/>
             </div>
-            <div className='text-center p-4 bg-white z-10'>
+            <div className='text-center lg:p-4 p-2 bg-white z-10'>
                 <h1 className='text-sm'>{item.attributes.title}</h1>
                 <h1 className='text-brand font-bold text-sm'>{currencyFormatter.format(item.attributes.price)}</h1>
-                <button onClick={() => addItemToCart?.(item)} className='bg-brand text-gray-100 font-semibold mt-2 w-full text-sm p-3 rounded'>Add To Card</button>
+                <button onClick={() => addItemToCart?.(item)} className='bg-brand text-xs text-gray-100 font-semibold mt-2 w-full lg:text-sm p-3 md:rounded'>Add To Card</button>
             </div>
         </div>
     )

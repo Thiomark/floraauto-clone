@@ -13,10 +13,10 @@ const ProfileHeaderComponent: FC<Props> = ({children, title}) => {
     ]
     return (
         <>
-            <div className='divide-x divide-gray-300 mb-4 pb-2 border-b'>
+            <div className='divide-x divide-gray-300 mb-4 pb-2 border-b hidden lg:block'>
                 {links.map((link, index) => <Link key={link.url} href={link.url}><a className='px-4 text-gray-700 text-sm cursor-pointer'>{link.name}</a></Link>)}
             </div>
-            <div className='flex items-center justify-between'>
+            <div className='items-center justify-between hidden lg:flex'>
                 <h1 className='font-bold text-2xl text-gray-700'>{title}</h1>
                 {children}
             </div>

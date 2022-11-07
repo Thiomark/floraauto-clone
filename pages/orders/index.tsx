@@ -15,7 +15,7 @@ const Orders = () => {
     
     return (
         <Layout imageHeight='' headerMinimal>
-            <main className='mx-auto container px-10 py-10'>
+            <main className='mx-auto container px-4 lg:px-10 lg:py-10'>
                 <ProfileHeaderComponent title='Orders' />
                 <div className='space-y-2 py-6'>
                     {orders.map((order, index) => {
@@ -23,8 +23,8 @@ const Orders = () => {
                         <div className='bg-gray-50 p-6 text-sm cursor-pointer rounded'>
                             <h1 className='text-md font-bold'>Order #{order.id}</h1>
                             <div className='text-xs space-x-3 flex items-center'>
-                                <h1 className='uppercase text-gray-500'>ordered: {format(new Date(order.attributes?.createdAt || ''), 'PP')}</h1>
-                                <h1 className='uppercase text-gray-500'>Paid: {format(new Date(order.attributes?.createdAt || ''), 'PP')}</h1>
+                                <h1 className='uppercase text-gray-500'>ordered: {order.attributes?.createdAt && format(new Date(order.attributes?.createdAt || ''), 'PP')}</h1>
+                                <h1 className='uppercase text-gray-500'>Paid: {order.attributes?.createdAt && format(new Date(order.attributes?.createdAt || ''), 'PP')}</h1>
                                 {order.attributes.shippedAt ? <h1 className='font-bold text-gray-800'>Delivered {format(new Date(order.attributes.shippedAt || ''), 'PP')}</h1> : <h1 className='font-bold text-gray-800'>Not Delivered</h1>}
                             </div>
                             <div className='flex cursor-pointer'>

@@ -19,13 +19,13 @@ const SignIn: NextPage = () => {
 
     return (
         <Layout headerMinimal imageHeight=''>
-            <div className='container p-10 mx-auto py-40 '>
+            <div className='container lg:p-10 mx-auto lg:py-40 '>
                 <form action="POST" onSubmit={(e: any) => {
                     e.preventDefault();
                     usernameAndPasswordSignIn?.(credentials);
-                }} className='border border-gray-100 space-y-4 py-20 w-full max-w-xl mx-auto p-10 rounded'>
+                }} className='lg:border border-gray-100 space-y-4 py-20 w-full max-w-xl mx-auto lg:p-10 p-4 rounded'>
                     <div className='flex items-center justify-between'>
-                        <h1 className='text-3xl font-bold'>Sign In</h1>
+                        <h1 className='text-3xl font-bold hidden lg:block'>Sign In</h1>
                         <Link href='/signup'><a className='underline text-blue-600 text-sm'>I don&apos;t have an account</a></Link>
                     </div>
                     <input value={credentials.name} onChange={(event: ChangeEvent<HTMLInputElement>) => setCrdentails(prev => ({

@@ -4,7 +4,6 @@ import type { ReactNode } from 'react';
 import qs from 'qs';
 import { CarPartType, CartAction, CartState, CartType, PartsContextInterface, StrapiResponseType } from '../types/Parts';
 import { toast } from 'react-toastify';
-import { cart } from '../utils/data';
 
 // const defaultCartState: CartState = cart
 

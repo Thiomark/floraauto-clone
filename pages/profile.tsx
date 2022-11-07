@@ -33,11 +33,12 @@ const Profile = () => {
 
     return (
         <Layout imageHeight='' headerMinimal>
-            {user && <main className='container mx-auto px-10 py-10'>
+            {user && <main className='container mx-auto px-4 py-2 lg:px-10 lg:py-10'>
+                <h1 className='font-bold lg:hidden mb-4 lg:mb-10 text-lg text-gray-600'>Profile</h1>
                 <ProfileHeaderComponent title='Account Settings'>
                     <button onClick={() => signOut?.()} className='my-btn'>Sign Out</button>
                 </ProfileHeaderComponent>
-                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => submit(event)} className='apt-form gap-8'>
+                <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => submit(event)} className='space-y-4 lg:space-y-0 lg:apt-form lg:gap-8'>
                     {userFromStructure.map(ele => {       
                         return <input onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             setUpdateUser((prev: UpdateUserType) => ({...prev, [ele.name]: event.target.value}))

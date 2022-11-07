@@ -49,8 +49,8 @@ const Checkout: NextPage = () => {
     
     return (
         <Layout imageHeight='' headerMinimal>
-            <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => submit(event)} className='px-10 container mx-auto mb-20'>
-                <div className='apt-form max-w-5xl mx-auto'>
+            <form onSubmit={(event: React.FormEvent<HTMLFormElement>) => submit(event)} className='lg:px-10 px-4 container mx-auto mb-4 lg:mb-20'>
+                <div className='lg:apt-form max-w-5xl mx-auto space-y-4 lg:space-y-0'> {/*  */}
                     <h1 className='font-bold text-xl col-span-2'>Billing Details</h1>
                     {billingFromStructure.map(ele => {
                         if(ele.type === 'text-area'){
@@ -63,12 +63,12 @@ const Checkout: NextPage = () => {
                                 //@ts-ignore
                                 <input value={order[ele.name]} onChange={(e : ChangeEvent<HTMLInputElement>) => setOrder((prev: any) => ({
                                     ...prev, [ele.name]: e.target.value 
-                                }))} required key={ele.name} placeholder={ele.lable} className={ele.length + ' form-input'} />
+                                }))} required key={ele.name} placeholder={ele.lable} className={ele.length + ' form-input w-full'} />
                             )
                         }
                     })}
                 </div>
-                <div className='max-w-5xl mx-auto p-6 bg-gray-100 rounded'>
+                <div className='max-w-5xl mx-auto p-6 bg-gray-100 mt-4 lg:mt-0 rounded'>
                     <h1 className='font-bold text-lg border-b my-4 py-2'>Your Order</h1>
                     <h1 className='font-bold'>Items</h1>
                     <div className='space-y-2 py-6'>

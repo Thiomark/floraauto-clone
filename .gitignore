@@ -14,7 +14,8 @@
 
 # production
 /build
-
+/android
+/ios
 # misc
 .DS_Store
 *.pem
@@ -35,3 +36,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env
+capacitor.config.ts
